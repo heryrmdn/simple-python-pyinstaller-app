@@ -7,7 +7,7 @@ node {
             sh 'pylint --fail-under=8 **/*.py'
         }
         stage('Test') {
-            sh 'py.test --junit-xml --junit-xml=unittests.xml **/test_*.py --cov-report=xml --cov=gameactions --cov-branch'
+            sh 'pytest **/test_*.py --junit-xml=unittests.xml --cov-report=xml --cov=sources --cov-branch'
             junit 'unittests.xml '
         }
     }
