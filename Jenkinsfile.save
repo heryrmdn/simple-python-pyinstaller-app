@@ -1,0 +1,15 @@
+node {
+    def pythonImage = 'python:3.9-slim'
+
+    
+
+    stage('Install Dependencies') {
+        sh 'pip3 install pylint'
+    }
+    stage('Build') {
+        sh 'pylint --fail-under=8 *.py'
+    }
+    stage('Test') {
+        sh 'pytest test_*.py --junit-xml=unittests.xml --cov-report=xml --cov=gameactions --cov-branch'
+    }
+}

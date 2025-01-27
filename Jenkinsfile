@@ -1,11 +1,19 @@
 node {
+    def python = 'python:3.9-slim'
+
     stage('Install Dependencies') {
-        sh 'pip3 install pylint'
+	docker.image(python).inside {
+            sh 'pip3 install -r requirements.txt'
+        }
     }
     stage('Build') {
-        sh 'pylint --fail-under=8 *.py'
+        docker.image(python).inside {
+            sh 'pylint --fail-under=8 *.py'
+        }
     }
     stage('Test') {
-        sh 'pytest test_*.py --junit-xml=unittests.xml --cov-report=xml --cov=gameactions --cov-branch'
+        docker.image(python).inside {
+            sh 'pytest test_*.py --junit-xml=unittests.xml --cov-report=xml --cov=gameactions --cov-branch'
+        }
     }
 }
