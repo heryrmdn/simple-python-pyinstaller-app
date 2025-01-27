@@ -1,23 +1,14 @@
 node {
-    def python = 'python:3.9-slim'
-
-    try {
-        docker.image(python).inside('-p 3000:3000 -u root') {
-            stage('Install Dependencies') {
-                sh 'pip install --no-cache-dir -r requirements.txt'
-            }
-
-            stage('Build') {
-                sh 'pylint --fail-under=8 *.py'
-            }
-
-            stage('Test') {
-                sh 'pytest test_*.py --junit-xml=unittests.xml --cov-report=xml --cov=gameactions --cov-branch'
-            }
+    stage('Build') {
+        docker.image('python:3.9-slim').inside {
+            sh 'python -m py_compile sources/add2vals.py sources/calc.py'
         }
+    }
 
-    } catch (Exception e) {
-        currentBuild.result = 'FAILURE'
-        throw e
+    stage('Test') {
+        docker.image('qnib/pytest').inside {
+            sh 'py.test --verbose --junit-xml test-reports/results.xml source/test_calc.py'
+        }
+        junit 'test-reports/result/xml'
     }
 }
