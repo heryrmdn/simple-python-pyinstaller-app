@@ -1,4 +1,7 @@
 node {
+    stage('Install Dependencies') {
+        sh 'pip3 install pylint'
+    }
     stage('Build') {
         sh 'pylint --fail-under=8 *.py'
     }
