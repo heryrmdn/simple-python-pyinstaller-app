@@ -4,7 +4,7 @@ node {
     try {
         docker.image(python).inside {
             stage('Install Dependencies') {
-                sh 'pip install -r requirements.txt'
+                sh 'pip install --no-chace-dir --user -r requirements.txt'
             }
 
             stage('Build') {
