@@ -2,9 +2,9 @@ node {
     def python = 'python:3.9-slim'
 
     try {
-        docker.image(python).inside {
+        docker.image(python).inside('-p 3000:3000 -u root') {
             stage('Install Dependencies') {
-                sh 'pip install --no-cache-dir --user -r requirements.txt'
+                sh 'pip install --no-cache-dir -r requirements.txt'
             }
 
             stage('Build') {
