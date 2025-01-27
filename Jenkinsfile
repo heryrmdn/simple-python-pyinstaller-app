@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                sh 'python3 -m venv /tmp/venv && source /tmp/venv/bin/activate && pip3 install --user -r requirements.txt --no-cache-dir'
+                sh 'pip install -r requirements.txt'
             }
         }
         stage('Build') {
