@@ -1,25 +1,23 @@
-pipeline {
-    agent {
-        docker {
-            image 'python:3.9-slim'
-            args '-p 3000:3000'
-        }
-    }
-    stages {
-        stage('Install Dependencies') {
-            steps {
-                sh 'pip install --user -r requirements.txt'
+node {
+    def python = 'python:3.9-slim'
+
+    try {
+        docker.image(python).inside {
+            stage('Install Dependencies') {
+                sh 'pip install -r requirements.txt'
             }
-        }
-        stage('Build') {
-            steps {
+
+            stage('Build') {
                 sh 'pylint --fail-under=8 *.py'
             }
-        }
-        stage('Test') {
-            steps {
+
+            stage('Test') {
                 sh 'pytest test_*.py --junit-xml=unittests.xml --cov-report=xml --cov=gameactions --cov-branch'
             }
         }
+
+    } catch (Exception e) {
+        currentBuild.result = 'FAILURE'
+        throw e
     }
 }
