@@ -1,2 +1,8 @@
+pyyaml
+boto3
 pylint
 pytest
+pytest-mock
+pytest-cov
+requests
+websockets
