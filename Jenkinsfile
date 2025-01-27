@@ -2,7 +2,7 @@ node {
     stage('Install Dependencies') {
         docker.image('python:3.9-slim').inside {
             sh 'ls -la requirements.txt'
-            sh 'pipe install -U -r requirements.txt --verbose'
+            sh 'pip3 install -U -r requirements.txt --verbose'
         }
     }
 
