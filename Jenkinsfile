@@ -3,6 +3,8 @@ node {
 
     stage('Install Dependencies') {
 	docker.image(python).inside {
+            sh 'pwd'
+            sh 'ls -la'
             sh 'pip3 install -r requirements.txt --no-cache-dir'
         }
     }
