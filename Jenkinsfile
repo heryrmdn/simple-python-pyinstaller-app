@@ -8,7 +8,11 @@ node {
         }
         stage('Test') {
             sh 'pytest **/test_*.py --junit-xml=unittests.xml'            
-            junit 'unittests.xml '
+            junit 'unittests.xml'
+        }
+	stage('Deploy') {
+            sh 'pyinstaller --onefile sources/add2vals.py'
+            archiveArtifacts 'dist/add2vals'
         }
     }
 }

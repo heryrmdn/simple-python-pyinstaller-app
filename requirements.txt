@@ -6,3 +6,4 @@ pytest-mock
 pytest-cov
 requests
 websockets
+pyinstaller
