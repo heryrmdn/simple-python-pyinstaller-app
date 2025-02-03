@@ -3,6 +3,7 @@ node {
         stage('Install Dependencies') {
             sh 'pip3 install --no-cache-dir  -U -r requirements.txt --verbose'
 	    sh 'pip3 install pyinstaller'
+            sh 'apt-get update && apt-get install -y binutils'
         }
         stage('Build') {
             sh 'pylint --fail-under=8 **/*.py'
