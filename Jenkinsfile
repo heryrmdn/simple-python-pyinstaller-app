@@ -1,5 +1,5 @@
 node {
-    docker.image('python:3.9-slim').inside('--user root' --dns 8.8.8.8) {
+    docker.image('python:3.9-slim').inside('--user root --dns 8.8.8.8') {
         stage('Install Dependencies') {
             sh 'pip3 install --no-cache-dir -U -r requirements.txt --verbose -vvv'
 	    sh 'apt-get update && apt-get install -y binutils build-essential libssl-dev libffi-dev'
