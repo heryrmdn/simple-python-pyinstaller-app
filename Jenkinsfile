@@ -1,7 +1,7 @@
 node {
     docker.image('python:3.9-slim').inside('--user root') {
         stage('Install Dependencies') {
-            sh 'pip3 install --no-cache-dir -U -r requirements.txt --index-url https://pypi.tuna.tsinghua.edu.cn/simple  --verbose -vvv'
+            sh 'pip3 install --no-cache-dir -U -r requirements.txt --default-timeout=100 --verbose -vvv'
 	    sh 'apt-get update && apt-get install -y binutils build-essential libssl-dev libffi-dev'
         }
         stage('Build') {
