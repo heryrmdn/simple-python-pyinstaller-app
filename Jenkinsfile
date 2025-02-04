@@ -1,7 +1,7 @@
 node {
     docker.image('python:3.9-slim').inside('--user root') {
         stage('Install Dependencies') {
-	    sh 'nslookup pypi.org'
+	    sh 'ping pypi.org'
             sh 'pip install --no-cache-dir -U -r requirements.txt --verbose -vvv'
 	    sh 'apt-get update && apt-get install -y binutils build-essential libssl-dev libffi-dev'
         }
