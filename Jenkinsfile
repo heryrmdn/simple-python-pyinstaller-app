@@ -1,7 +1,7 @@
 node {
     docker.image('python:3.9-slim').inside('--user root') {
         stage('Install Dependencies') {
-            sh 'pip3 install --no-cache-dir -U -r requirements.txt --verbose -vvv'
+            sh 'pip3 install pyyaml boto3 pylint pytest pytest-mock pytest-cov requests websockets pyinstaller'
 	    sh 'apt-get update && apt-get install -y binutils build-essential libssl-dev libffi-dev'
         }
         stage('Build') {
