@@ -12,6 +12,8 @@ docker run \
   --publish 2376:2376 \
   --publish 3000:3000 --publish 5000:5000 \
   --restart always \
+  --dns 8.8.8.8 \
+  --dns 8.8.4.4 \
   docker:dind \
   --storage-driver overlay2
 
