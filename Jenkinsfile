@@ -12,10 +12,15 @@ node {
             sh 'pytest **/test_*.py --junit-xml=unittests.xml'            
             junit 'unittests.xml'
         }
+	stage('Manual Approval') {
+            steps {
+                input message: 'Lanjutkan ke tahap Deploy? (Klik "Proceed" untuk melanjutkan)'
+            }
+        }
 	stage('Deploy') {
             sh 'pyinstaller --onefile sources/add2vals.py'
             archiveArtifacts 'dist/add2vals'
-            sh 'sleep 30s'
+            sh 'sleep 5m'
         }
     }
 }
