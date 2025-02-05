@@ -13,7 +13,7 @@ node {
             junit 'unittests.xml'
         }
 	stage('Manual Approval') {
-            input message: 'Lanjutkan ke tahap Deploy? (Klik "Proceed" untuk melanjutkan)'
+            input(message: "Lanjutkan ke tahap Deploy? (Klik "Proceed" untuk melanjutkan)")
         }
 	stage('Deploy') {
             sh 'pyinstaller --onefile sources/add2vals.py'
