@@ -1,5 +1,5 @@
 node {
-    docker.image('python:3.9-slim').inside('--user root') {
+    docker.image('python:3.9-slim').inside('--user root --network=jenkins') {
         stage('Install Dependencies') {
             sh 'pip3 install --no-cache-dir -U -r requirements.txt --verbose'
 	    sh 'apt-get update && apt-get install -y binutils build-essential libssl-dev libffi-dev'
