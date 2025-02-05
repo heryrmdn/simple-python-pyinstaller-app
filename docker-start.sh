@@ -37,7 +37,7 @@ docker run \
 docker run \
   --name prometheus \
   --detach \
-  --publish 9090:9090 \
+  --publish 9091:9090 \
 prom/prometheus
 
 docker run \
