@@ -33,3 +33,16 @@ docker run \
   --env JAVA_OPTS="-Dhudson.plugins.git.GitSCM.ALLOW_LOCAL_CHECKOUT=true" \
   --env JENKINS_OPTS="--httpPort=49000" \
   myjenkins-blueocean:2.426.2-1 
+
+docker run \
+  --name prometheus \
+  --detach \
+  --publish 9091:9091 \
+prom/prometheus
+
+docker run \
+  --name grafana \
+  --detach \
+  --publish 3031:3031 \
+  --env GF_SERVER_HTTP_PORT=3031 \
+grafana/grafana
