@@ -1,8 +1,8 @@
 node {
     docker.image('python:3.9-slim').inside('--user root') {
         stage('Install Dependencies') {
-            sh 'pip3 install --no-cache-dir -U -r requirements.txt --verbose'
-            sh 'pip3 install pyinstaller'
+            sh 'python3 -m pip3 install --no-cache-dir -U -r requirements.txt --verbose'
+            sh 'python3 -m pip3 install pyinstaller'
 	    sh 'apt-get update && apt-get install -y binutils build-essential libssl-dev libffi-dev'
         }
         stage('Build') {
