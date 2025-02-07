@@ -18,7 +18,7 @@ node {
 	stage('Deploy') {
             sh 'pyinstaller --onefile sources/add2vals.py'
             archiveArtifacts 'dist/add2vals'
-            sh 'sleep 5m'
+            sh 'sleep 1m'
         }
     }
 }
